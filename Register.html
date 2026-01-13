@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #03e9f4;
+        }
+
+        input,
+        button {
+            background: transparent;
+            border: 0;
+            outline: none;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(#141e30, #243b55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #03e9f4;
+        }
+
+        .registerBox {
+            width: 400px;
+            height: auto;
+            background-color: #0c1622;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0 15px 25px 0 rgba(0, 0, 0, .6);
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            color: aliceblue;
+            margin-bottom: 30px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .item {
+            height: 35px;
+            border-bottom: 1px solid #fff;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .item1 {
+            position: relative;
+        }
+
+        .center select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z" /></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .center select:focus {
+            border-color: #03e9f4;
+            background-color: #fff;
+        }
+
+        .center select::-ms-expand {
+            display: none;
+        }
+
+        .item input {
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+
+        /* .item input:focus+label,
+        .item input:valid+label {
+            top: 0px;
+            font-size: 2px;
+        } */
+
+        .item label {
+            position: absolute;
+            left: 0;
+            top: -8px;
+            transition: all 0.5s linear;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-top: 30px;
+            color: #03e9f4;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            left: 35%;
+        }
+
+        .btn:hover {
+            border-radius: 5px;
+            color: #fff;
+            background: #03e9f4;
+            box-shadow: 0 0 5px 0 #03e9f4, 0 0 25px 0 #03e9f4, 0 0 50px 0 #03e9f4, 0 0 100px 0 #03e9f4;
+            transition: all 1s linear;
+        }
+
+        .btn>span {
+            position: absolute;
+        }
+
+        .btn>span:nth-child(1) {
+            width: 100%;
+            height: 2px;
+            background: -webkit-linear-gradient(left, transparent, #03e9f4);
+            left: -100%;
+            top: 0px;
+            animation: line1 1s linear infinite;
+        }
+
+        @keyframes line1 {
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+
+        .btn>span:nth-child(2) {
+            margin-top: 50px;
+            width: 2px;
+            height: 100%;
+            background: -webkit-linear-gradient(top, transparent, #03e9f4);
+            right: 0px;
+            top: -100%;
+            animation: line2 1s 0.25s linear infinite;
+        }
+
+        @keyframes line2 {
+            50%,
+            100% {
+                top: 100%;
+            }
+        }
+
+        .btn>span:nth-child(3) {
+            width: 100%;
+            height: 2px;
+            background: -webkit-linear-gradient(left, #03e9f4, transparent);
+            left: 100%;
+            bottom: 0px;
+            animation: line3 1s 0.75s linear infinite;
+        }
+
+        @keyframes line3 {
+            50%,
+            100% {
+                left: -100%;
+            }
+        }
+
+        .btn>span:nth-child(4) {
+            width: 2px;
+            height: 100%;
+            background: -webkit-linear-gradient(top, transparent, #03e9f4);
+            left: 0px;
+            top: 100%;
+            animation: line4 1s 1s linear infinite;
+        }
+
+        @keyframes line4 {
+            50%,
+            100% {
+                top: -100%;
+            }
+        }
+    </style>
+    <script src="register.js" der></script>
+</head>
+
+<body>
+    <div class="registerBox">
+        <h2>注册账号</h2>
+        <form id="registerForm">
+            <div class="item">
+                <input type="text" id="usernameInput" name="id" required>
+                <label for="usernameInput">账号：</label>
+            </div>
+            <div class="item">
+                <input type="password" id="passwordInput" name="password" required>
+                <label for="passwordInput">密码:</label>
+            </div>
+            <div class="center">
+                <select id="identity" name="identity">
+                    <option value="" disabled selected>请选择身份</option>
+                    <option value="customer">客户</option>
+                    <option value="employee">雇员</option>
+                    <option value="supplier">供应商</option>
+                </select>
+            </div>
+            <div id="additionalInfo" style="display: none;">
+                <!-- 客户注册信息 -->
+                <br>
+                <div id="customerInfo" style="display: none;">
+                    <div class="item">
+                        <input type="text" id="companyNameInput" name="c_companyname" required>
+                        <label for="companyNameInput">公司名称：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="contactNameInput" name="c_contactname" required>
+                        <label for="contactNameInput">联系人姓名：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="contactPositionInput" name="c_contacttitle" required>
+                        <label for="contactPositionInput">联系人职务：</label>
+                    </div>
+                    <div class="item">
+                        <input type="tel" id="phoneInput" name="c_tel" required>
+                        <label for="phoneInput">电话：</label>
+                    </div>
+                </div>
+                <!-- 雇员注册信息 -->
+                <div id="employeeInfo" style="display: none;">
+                    <div class="item">
+                        <input type="text" id="lastNameInput" name="e_surname" required>
+                        <label for="lastNameInput">姓氏：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="firstNameInput" name="e_givenname" required>
+                        <label for="firstNameInput">名字：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="employeePositionInput" name="e_title" required>
+                        <label for="employeePositionInput">职务：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="titleInput" name="e_honorifictitle" required>
+                        <label for="titleInput">尊称：</label>
+                    </div>
+                    <div class="item">
+                        <input type="datetime-local" id="hireDateInput" name="e_Dateofemployment" required>
+                        <label for="hireDateInput">雇佣日期：</label>
+                    </div>
+                    <div class="item">
+                        <input type="tel" id="homePhoneInput" name="e_homephone" required>
+                        <label for="homePhoneInput">家庭电话：</label>
+                    </div>
+                </div>
+                <!-- 供应商注册信息 -->
+                <div id="supplierInfo" style="display: none;">
+                    <div class="item">
+                        <input type="text" id="supplierCompanyNameInput" name="s_companyname" required>
+                        <label for="supplierCompanyNameInput">公司名称：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="supplierContactNameInput" name="s_contactname" required>
+                        <label for="supplierContactNameInput">联系人姓名：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="supplierContactPositionInput" name="s_contacttitle" required>
+                        <label for="supplierContactPositionInput">联系人职务：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="addressInput" name="s_position" required>
+                        <label for="addressInput">地址：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="cityInput" name="s_city" required>
+                        <label for="cityInput">城市：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="regionInput" name="s_region" required>
+                        <label for="regionInput">地区：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="postalCodeInput" name="s_postalcode" required>
+                        <label for="postalCodeInput">邮政编码：</label>
+                    </div>
+                    <div class="item">
+                        <input type="text" id="countryInput" name="s_nation" required>
+                        <label for="countryInput">国家：</label>
+                    </div>
+                    <div class="item">
+                        <input type="tel" id="supplierPhoneInput" name="s_tel" required>
+                        <label for="supplierPhoneInput">电话：</label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" type="submit">注册
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </form>
+        <p>已有账号， <a href="login.html">点击登陆</a></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("identity").addEventListener("change", function () {
+        var identity = document.getElementById("identity").value;
+        switch (identity) {
+            case "customer":
+                showAdditionalInfo("customerInfo");
+                break;
+            case "employee":
+                showAdditionalInfo("employeeInfo");
+                break;
+            case "supplier":
+                showAdditionalInfo("supplierInfo");
+                break;
+            default:
+                hideAllAdditionalInfo();
+        }
+    });
+
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form data
+        var formData = {
+            id: document.getElementById("usernameInput").value,
+            password: document.getElementById("passwordInput").value,
+            //identity: document.getElementById("identity").value
+        };
+
+        // Get additional info based on identity
+        var additionalInfo;
+        switch (formData.identity) {
+            case "customer":
+                additionalInfo = {
+                    c_companyname: document.getElementById("companyNameInput").value,
+                    c_contactname: document.getElementById("contactNameInput").value,
+                    c_contacttitle: document.getElementById("contactPositionInput").value,
+                    c_tel: document.getElementById("phoneInput").value
+                };
+                break;
+            case "employee":
+                additionalInfo = {
+                    e_surname: document.getElementById("lastNameInput").value,
+                    e_givenname: document.getElementById("firstNameInput").value,
+                    e_title: document.getElementById("employeePositionInput").value,
+                    e_honorifictitle: document.getElementById("titleInput").value,
+                    e_Dateofemployment: document.getElementById("hireDateInput").value,
+                    e_tel: document.getElementById("homePhoneInput").value
+                };
+                break;
+            case "supplier":
+                additionalInfo = {
+                    s_companyname: document.getElementById("supplierCompanyNameInput").value,
+                    s_contactname: document.getElementById("supplierContactNameInput").value,
+                    s_contacttitle: document.getElementById("supplierContactPositionInput").value,
+                    s_position: document.getElementById("addressInput").value,
+                    s_city: document.getElementById("cityInput").value,
+                    s_region: document.getElementById("regionInput").value,
+                    s_postalcode: document.getElementById("postalCodeInput").value,
+                    s_nation: document.getElementById("countryInput").value,
+                    s_homephone: document.getElementById("supplierPhoneInput").value
+                };
+                break;
+            default:
+                additionalInfo = {};
+        }
+
+        // Do something with the form data and additional info
+        console.log("Form Data:", formData);
+        console.log("Additional Info:", additionalInfo);
+    });
+});
+
+function showAdditionalInfo(infoId) {
+    hideAllAdditionalInfo();
+    document.getElementById(infoId).style.display = "block";
+    document.getElementById("additionalInfo").style.display = "block";
+}
+
+function hideAllAdditionalInfo() {
+    var infoElements = document.querySelectorAll("#additionalInfo > div");
+    infoElements.forEach(function (element) {
+        element.style.display = "none";
+    });
+    document.getElementById("additionalInfo").style.display = "none";
+}
+
+    </script>
+</body>
+
+</html>
